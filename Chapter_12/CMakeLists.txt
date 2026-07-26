@@ -3,7 +3,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BINARY_DIR}/Chapter_12)
 
 # Option for using Clang complier
 # Enabled in this subfolder by default
-option(USE_CLANG "Build examples with Clang" ON)
+option(USE_CLANG "Build examples with Clang" OFF)
 if(USE_CLANG)
     message("Using Clang in Chapter 12")
 
@@ -26,10 +26,12 @@ endif()
 
 # Create executable for each cpp file
 file(GLOB SOURCES "*.cpp")
+list(REMOVE_ITEM SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/12x22-testing_async_function_with_event_loop.cpp")
+list(REMOVE_ITEM SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/12x14-MSAN-uninitialized_memory.cpp")
 foreach(SOURCE ${SOURCES})
     get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
     add_executable(${EXECUTABLE_NAME} ${SOURCE})
-    target_link_libraries(${EXECUTABLE_NAME} ${Boost_LIBRARIES})
+    target_link_libraries(${EXECUTABLE_NAME} Boost::thread Boost::system Boost::container)
 
     # Add compiler and linker flags depending on type of sanitizer
     if (EXECUTABLE_NAME MATCHES ".*ASAN.*")
@@ -60,5 +62,5 @@ foreach(SOURCE ${SOURCES})
     else()
         message("Sanitizer not enabled for ${EXECUTABLE_NAME}")
     endif()
-
+    set_target_properties(${EXECUTABLE_NAME} PROPERTIES FOLDER "Chapter_12")
 endforeach()

@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Include Boost::Cobalt
-find_package(Boost 1.86.0 REQUIRED COMPONENTS thread system container cobalt)
+find_package(Boost ${REQUIRED_BOOST_VERSION} REQUIRED COMPONENTS thread system container cobalt)
 if(NOT Boost_FOUND)
-    message(FATAL_ERROR "Boost 1.86.0 with Boost.Cobalt is required but not found.")
+    message(FATAL_ERROR "Boost ${REQUIRED_BOOST_VERSION} with Boost.Cobalt is required but not found.")
 endif()
 
 # Include Boost directories
@@ -19,5 +19,6 @@ file(GLOB SOURCES "*.cpp")
 foreach(SOURCE ${SOURCES})
     get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
     add_executable(${EXECUTABLE_NAME} ${SOURCE})
-    target_link_libraries(${EXECUTABLE_NAME} ${Boost_LIBRARIES})
+    target_link_libraries(${EXECUTABLE_NAME} Boost::thread Boost::system Boost::container Boost::cobalt)
+    set_target_properties(${EXECUTABLE_NAME} PROPERTIES FOLDER "Chapter_10")
 endforeach()
