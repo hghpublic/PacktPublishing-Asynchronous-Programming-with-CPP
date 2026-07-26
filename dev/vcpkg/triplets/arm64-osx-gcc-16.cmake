@@ -1,0 +1,16 @@
+message(STATUS "Using GCC 16 toolchain for arm64-osx-gcc-16 triplet")
+
+set(VCPKG_TARGET_ARCHITECTURE arm64)
+set(VCPKG_CRT_LINKAGE dynamic)
+set(VCPKG_LIBRARY_LINKAGE static)
+
+set(VCPKG_CMAKE_SYSTEM_NAME Darwin)
+set(VCPKG_OSX_ARCHITECTURES arm64)
+
+# cmake_path(ABSOLUTE_PATH "../toolchains/gcc-16.cmake" BASE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" NORMALIZE OUTPUT_VARIABLE TOOLCHAIN_FILE)
+
+
+get_filename_component(TOOLCHAIN_FILE
+    "${CMAKE_CURRENT_LIST_DIR}/../toolchains/gcc-16.cmake"
+    ABSOLUTE)
+set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${TOOLCHAIN_FILE}")

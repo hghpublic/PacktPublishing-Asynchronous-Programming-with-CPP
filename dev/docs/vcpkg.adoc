@@ -1,0 +1,130 @@
+= vcpkg
+:toc:
+:sectnums:
+
+https://learn.microsoft.com/en-us/vcpkg/concepts/triplets
+
+== Add or replace triplets
+
+https://learn.microsoft.com/en-us/vcpkg/concepts/triplets#custom-triplets
+
+== Using Overlay Triplets
+
+https://learn.microsoft.com/en-us/vcpkg/users/examples/overlay-triplets-linux-dynamic
+
+== Triplet variables
+
+https://learn.microsoft.com/en-us/vcpkg/users/triplets?source=recommendations
+
+
+== Configuring Vcpkg with a Custom Triplet
+
+https://www.dominikgrabiec.com/posts/2023/03/14/configuring_vcpkg_libraries_with_custom_triplet.html
+
+. customise the top level `CMakeLists.txt` file
+. add/modify two statements before the first `project()` declaration
+
+----
+VCPKG_OVERLAY_TRIPLETS
+VCPKG_TARGET_TRIPLET
+
+set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_SOURCE_DIR}/Build/Triplets")
+set(VCPKG_TARGET_TRIPLET "x64-windows-custom")
+----
+
+== Stash
+
+
+Manifest with custom triplets example? #19405
+
+https://github.com/microsoft/vcpkg/discussions/19405
+
+=== What is manifest mode?
+
+https://learn.microsoft.com/en-us/vcpkg/concepts/manifest-mode
+
+
+=== vcpkg Using custom triplet/toolchain
+
+https://www.reddit.com/r/cpp_questions/comments/1p3ct8i/vcpkg_using_custom_triplettoolchain/
+
+
+https://git.imp.fu-berlin.de/bioroboticslab/auto/vcpkg/-/blob/2020.11-1/docs/examples/overlay-triplets-linux-dynamic.md
+
+
+=== How do I create triplet and cmake inside toolchain directory for arm64 configuration on linux to insall packages using vcpkg #8185
+
+https://github.com/microsoft/vcpkg/issues/8185
+
+vcpkg does allow users to build libraries for custom architectures not included in the default vcpkg triplets, for example, arm64-linux. In order to do so, you need to have a valid CMake toolchain file and a custom triplet that points to the toolchain (see documentation for custom triplets).
+
+https://cmake.org/cmake/help/v3.11/manual/cmake-toolchains.7.html
+
+https://github.com/microsoft/vcpkg/blob/master/docs/users/triplets.md
+
+https://github.com/microsoft/vcpkg/tree/master/ports
+
+
+=== Cross-Compiling with vcpkg
+
+https://www.studyplan.dev/cmake/cmake-vcpkg-cross-compiling
+
+Tricks for Successfully Using vcpkg in C and C++ Projects
+
+https://medium.com/better-programming/tricks-for-successfully-using-vcpkg-in-c-and-c-projects-b775cc836d81
+
+=== How do I set the CMake toolchain when using a custom triplet on Windows #8534
+
+ https://github.com/microsoft/vcpkg/issues/8534
+
+
+----
+set(VCPKG_TARGET_TRIPLET <your triplet> CACHE STRING "VCPKG Target Triplet to use")
+
+or via cmd line use -DVCPKG_TARGET_TRIPLET=<your triplet>
+
+but it is documented here:
+https://vcpkg.readthedocs.io/en/latest/users/integration/#triplet-selection
+----
+
+
+=== Unable to use vcpkg with gcc-14 on Mac-OS 15 #43160
+
+https://github.com/microsoft/vcpkg/issues/43160
+
+=== gcc-project
+
+
+https://github.com/minchus/gcc-vcpkg/blob/main/README.md
+
+
+=== Toolchain file in CMake
+
+https://fekir.info/post/toolchain-file-in-cmake/
+
+
+=== Building vcpkg dependencies with project toolchain
+
+https://sdowney.org/posts/building-vcpkg-dependencies-with-project-toolchain/
+
+
+=== How to use vcpkg with clang on linux?
+
+https://stackoverflow.com/questions/74422058/how-to-use-vcpkg-with-clang-on-linux
+
+=== Installing and Using Packages Example: SQLite
+
+https://github.com/MicrosoftDocs/vcpkg-docs/blob/main/vcpkg/examples/installing-and-using-packages.md
+
+=== CMake Integration
+
+
+https://host139.ik.w-hs.de/tsky/vcpkg/-/blob/f688b2e29676bfa3a02ead4b7096c589f8af8180/docs/users/buildsystems/cmake-integration.md
+
+=== CMake integration testing
+
+https://medium.com/@nerudaj/cmake-integration-testing-4d71184525ea
+
+=== vcpkg in CMake projects
+
+https://learn.microsoft.com/en-us/vcpkg/users/buildsystems/cmake-integration

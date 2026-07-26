@@ -1,0 +1,8 @@
+= devcontainer
+
+----
+[7/27/2026, 1:03:38 AM] For C++ source files, IntelliSenseMode was changed from "linux-gcc-x64" to "linux-gcc-arm64" based on compiler args and querying compilerPath: "/usr/bin/g++"
+[7/27/2026, 1:03:38 AM] For C source files, IntelliSenseMode was changed from "linux-gcc-x64" to "linux-gcc-arm64" based on compiler args and querying compilerPath: "/usr/bin/g++"
+Error: there is no registered task type 'cppbuild'. Did you miss installing an extension that provides a corresponding task provider?
+
+----

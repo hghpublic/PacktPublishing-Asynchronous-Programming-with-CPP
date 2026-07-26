@@ -1,0 +1,366 @@
+= macOS
+:toc:
+
+== vcpkg
+
+libbacktrace::
++
+----
+[cmake]   libbacktrace currently requires the following programs from the system
+[cmake]   package manager:
+[cmake] 
+[cmake]       autoconf autoconf-archive automake libtoolize
+[cmake] 
+[cmake] 
+[cmake] 
+[cmake]       On Debian and Ubuntu derivatives:
+[cmake]           sudo apt install autoconf autoconf-archive automake libtool
+[cmake]       On recent Red Hat and Fedora derivatives:
+[cmake]           sudo dnf install autoconf autoconf-archive automake libtool
+[cmake]       On Arch Linux and derivatives:
+[cmake]           sudo pacman -S autoconf autoconf-archive automake libtool
+[cmake]       On Alpine:
+[cmake]           apk add autoconf autoconf-archive automake libtool
+[cmake]       On macOS:
+[cmake]           brew install autoconf autoconf-archive automake libtool
+[cmake] 
+----
+
+----
+brew install autoconf automake libtool
+brew install --cask libcblite
+brew install autoconf-archive
+----
+
+benchmark::
+----
+[cmake]   By not providing "Findbenchmark.cmake" in CMAKE_MODULE_PATH this project
+[cmake]   has asked CMake to find a package configuration file provided by
+[cmake]   "benchmark", but CMake did not find one.
+[cmake] 
+[cmake]   Could not find a package configuration file provided by "benchmark" with
+[cmake]   any of the following names:
+[cmake] 
+[cmake]     benchmark.cps
+[cmake]     benchmarkConfig.cmake
+[cmake]     benchmark-config.cmake
+[cmake] 
+[cmake]   Add the installation prefix of "benchmark" to CMAKE_PREFIX_PATH or set
+[cmake]   "benchmark_DIR" to a directory containing one of the above files.  If
+[cmake]   "benchmark" provides a separate development package or SDK, be sure it has
+[cmake]   been installed.
+----
+
+
+== g++-16
+
+----
+[build]                  from xxx/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_10/10x01-hello_boost_cobalt.cpp:3:
+[build] /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include/_string.h:176:48: error: 'rsize_t' has not been declared; did you mean 'ssize_t'?
+[build]   176 | errno_t memset_s(void *_LIBC_SIZE(__smax) __s, rsize_t __smax, int __c, rsize_t __n) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+[build]       |                                                ^~~~~~~
+[build]       |                                                ssize_t
+[build] /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include/_string.h:176:73: error: 'rsize_t' has not been declared; did you mean 'ssize_t'?
+[build]   176 | errno_t memset_s(void *_LIBC_SIZE(__smax) __s, rsize_t __smax, int __c, rsize_t __n) __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+[build]       |                                                                         ^~~~~~~
+[build]       |                                                                         ssize_t
+[build] ninja: build stopped: subcommand failed.
+[proc] The command: /opt/homebrew/bin/cmake --build xxx/PacktPublishing-Asynchronous-Programming-with-CPP/build --config Debug --target 10x01-hello_boost_cobalt -- exited with code: 1
+----
+
+== Chapter_10/10x01-hello_boost_cobalt
+
+----
+[build] [2/4  50% :: 0.347] Generating CXX dyndep file Chapter_10/CMakeFiles/10x01-hello_boost_cobalt.dir/CXX.dd
+[build] [3/4  75% :: 1.642] Building CXX object Chapter_10/CMakeFiles/10x01-hello_boost_cobalt.dir/10x01-hello_boost_cobalt.cpp.o
+[build] [4/4 100% :: 1.686] Linking CXX executable bin/Chapter_10/10x01-hello_boost_cobalt
+[build] FAILED: [code=1] bin/Chapter_10/10x01-hello_boost_cobalt 
+[build] : && /opt/homebrew/bin/aarch64-apple-darwin25-g++-16 -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names Chapter_10/CMakeFiles/10x01-hello_boost_cobalt.dir/10x01-hello_boost_cobalt.cpp.o -o bin/Chapter_10/10x01-hello_boost_cobalt  vcpkg_installed/arm64-osx/debug/lib/libboost_thread.a  vcpkg_installed/arm64-osx/debug/lib/libboost_container.a  vcpkg_installed/arm64-osx/debug/lib/libboost_cobalt.a  vcpkg_installed/arm64-osx/debug/lib/libboost_atomic.a  vcpkg_installed/arm64-osx/debug/lib/libboost_chrono.a  vcpkg_installed/arm64-osx/debug/lib/libboost_date_time.a  vcpkg_installed/arm64-osx/debug/lib/libboost_context.a && :
+[build] Undefined symbols for architecture arm64:
+[build]   "boost::cobalt::this_thread::set_default_resource(std::pmr::memory_resource*)", referenced from:
+[build]       main::reset_res::operator()(std::pmr::memory_resource*) in 10x01-hello_boost_cobalt.cpp.o
+[build]       _main in 10x01-hello_boost_cobalt.cpp.o
+[build]   "std::__1::error_code::message() const", referenced from:
+[build]       boost::system::error_code::message() const in libboost_cobalt.a[2](exception.cpp.o)
+[build]   "std::exception_ptr::__from_native_exception_pointer(void*)", referenced from:
+[build]       std::exception_ptr std::__make_exception_ptr_explicit[abi:nqe210106]<boost::system::system_error>(boost::system::system_error&) in libboost_cobalt.a[2](exception.cpp.o)
+[build]       std::exception_ptr std::__make_exception_ptr_explicit[abi:nqe210106]<boost::asio::multiple_exceptions>(boost::asio::multiple_exceptions&) in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::exception_ptr::exception_ptr(std::exception_ptr const&)", referenced from:
+[build]       boost::cobalt::detail::moved_from_exception() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::detached_exception() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::completed_unexpected() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::wait_not_ready() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::already_awaited() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::allocation_failed() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::asio::detail::thread_info_base::rethrow_pending_exception() in libboost_cobalt.a[6](main.cpp.o)
+[build]       boost::asio::detail::thread_info_base::rethrow_pending_exception() in libboost_cobalt.a[6](main.cpp.o)
+[build]       ...
+[build]   "std::exception_ptr::~exception_ptr()", referenced from:
+[build]       boost::cobalt::detail::moved_from_exception() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::detached_exception() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::completed_unexpected() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::wait_not_ready() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::already_awaited() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::cobalt::detail::allocation_failed() in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::asio::detail::thread_info_base::~thread_info_base() in libboost_cobalt.a[6](main.cpp.o)
+[build]       ...
+[build]   "std::exception_ptr::operator=(std::exception_ptr const&)", referenced from:
+[build]       boost::asio::detail::thread_info_base::capture_current_exception() in libboost_cobalt.a[6](main.cpp.o)
+[build]       boost::asio::detail::thread_info_base::capture_current_exception() in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::runtime_error::runtime_error(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)", referenced from:
+[build]       boost::system::system_error::system_error(boost::system::error_code const&) in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::bad_array_new_length::bad_array_new_length()", referenced from:
+[build]       std::__throw_bad_array_new_length[abi:nqe210106]() in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::__init(char const*, unsigned long)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::basic_string[abi:nqe210106]<0>(char const*) in libboost_cobalt.a[2](exception.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::append(char const*)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::operator+=[abi:nqe210106](char const*) in libboost_cobalt.a[2](exception.cpp.o)
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> std::__1::operator+[abi:nqe210106]<char, std::__1::char_traits<char>, std::__1::allocator<char>>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>&&, char const*) in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::append(char const*, unsigned long)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::append[abi:nqe210106](std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in libboost_cobalt.a[2](exception.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::push_back(char)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::operator+=[abi:nqe210106](char) in libboost_cobalt.a[2](exception.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::~basic_string()", referenced from:
+[build]       boost::system::system_error::system_error(boost::system::error_code const&) in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&) in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::error_code::what() const in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::error_code::what() const in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::error_code::what() const in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::error_code::what() const in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::error_code::what() const in libboost_cobalt.a[2](exception.cpp.o)
+[build]       boost::system::error_code::what() const in libboost_cobalt.a[2](exception.cpp.o)
+[build]       ...
+[build]   "std::__1::__libcpp_atomic_wait(void const volatile*, long long)", referenced from:
+[build]       std::__1::__atomic_wait_backoff_impl<std::__1::__atomic_base<int, false>, void std::__1::__atomic_wait[abi:nqe210106]<std::__1::__atomic_base<int, false> const, int>(std::__1::__atomic_base<int, false> const&, int, std::__1::memory_order)::'lambda'(int const&)>::operator()[abi:nqe210106](std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000000000l>>) const in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::__1::__cxx_atomic_notify_one(void const volatile*)", referenced from:
+[build]       void std::__1::__atomic_notify_one[abi:nqe210106]<std::__1::__atomic_base<int, false>>(std::__1::__atomic_base<int, false> const&) in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::__1::__libcpp_atomic_monitor(void const volatile*)", referenced from:
+[build]       std::__1::__atomic_wait_backoff_impl<std::__1::__atomic_base<int, false>, void std::__1::__atomic_wait[abi:nqe210106]<std::__1::__atomic_base<int, false> const, int>(std::__1::__atomic_base<int, false> const&, int, std::__1::memory_order)::'lambda'(int const&)>::__update_monitor_val_and_poll[abi:nqe210106](void const volatile*, long long&) const in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::__1::pmr::get_default_resource()", referenced from:
+[build]       ___cxx_global_var_init.4 in libboost_cobalt.a[6](main.cpp.o)
+[build]       ___cxx_global_var_init.4 in libboost_cobalt.a[7](this_thread.cpp.o)
+[build]   "std::__1::align(unsigned long, unsigned long, void*&, unsigned long&)", referenced from:
+[build]       boost::asio::detail::align(unsigned long, unsigned long, void*&, unsigned long&) in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::__1::chrono::steady_clock::now()", referenced from:
+[build]       bool std::__1::__libcpp_thread_poll_with_backoff[abi:nqe210106]<void std::__1::__atomic_wait_unless[abi:nqe210106]<std::__1::__atomic_base<int, false>, void std::__1::__atomic_wait[abi:nqe210106]<std::__1::__atomic_base<int, false> const, int>(std::__1::__atomic_base<int, false> const&, int, std::__1::memory_order)::'lambda'(int const&)>(std::__1::__atomic_base<int, false> const const&, std::__1::memory_order, int&&)::'lambda'(), std::__1::__atomic_wait_backoff_impl<std::__1::__atomic_base<int, false>, void std::__1::__atomic_wait[abi:nqe210106]<std::__1::__atomic_base<int, false> const, int>(std::__1::__atomic_base<int, false> const&, int, std::__1::memory_order)::'lambda'(int const&)>&>(std::__1::__atomic_base<int, false> const&&, int&&, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000000000l>>) in libboost_cobalt.a[6](main.cpp.o)
+[build]       bool std::__1::__libcpp_thread_poll_with_backoff[abi:nqe210106]<void std::__1::__atomic_wait_unless[abi:nqe210106]<std::__1::__atomic_base<int, false>, void std::__1::__atomic_wait[abi:nqe210106]<std::__1::__atomic_base<int, false> const, int>(std::__1::__atomic_base<int, false> const&, int, std::__1::memory_order)::'lambda'(int const&)>(std::__1::__atomic_base<int, false> const const&, std::__1::memory_order, int&&)::'lambda'(), std::__1::__atomic_wait_backoff_impl<std::__1::__atomic_base<int, false>, void std::__1::__atomic_wait[abi:nqe210106]<std::__1::__atomic_base<int, false> const, int>(std::__1::__atomic_base<int, false> const&, int, std::__1::memory_order)::'lambda'(int const&)>&>(std::__1::__atomic_base<int, false> const&&, int&&, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000000000l>>) in libboost_cobalt.a[6](main.cpp.o)
+[build]   "std::rethrow_exception(std::exception_ptr)", referenced from:
+[build]       boost::asio::detail::thread_info_base::rethrow_pending_exception() in libboost_cobalt.a[6](main.cpp.o)
+[build] ld: symbol(s) not found for architecture arm64
+[build] collect2: error: ld returned 1 exit status
+[build] ninja: build stopped: subcommand failed.
+[proc] The command: /opt/homebrew/bin/cmake --build xxx/PacktPublishing-Asynchronous-Programming-with-CPP/build --config Debug --target 10x01-hello_boost_cobalt -- exited with code: 1
+[driver] Build completed: 00:00:01.705
+[build] Build finished with exit code 1
+----
+
+=== Chapter_12/12x01-ASAN_heap_use_after_free
+
+----
+[main] Building folder: xxx/PacktPublishing-Asynchronous-Programming-with-CPP/build 12x01-ASAN_heap_use_after_free
+[build] Starting build
+[proc] Executing command: /opt/homebrew/bin/cmake --build xxx/PacktPublishing-Asynchronous-Programming-with-CPP/build --config Debug --target 12x01-ASAN_heap_use_after_free --
+[build] [1/4  25% :: 0.019] Scanning xxx/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_12/12x01-ASAN_heap_use_after_free.cpp for CXX dependencies
+[build] FAILED: [code=1] Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o.ddi 
+[build] /usr/bin/clang++ -DBOOST_ATOMIC_NO_LIB -DBOOST_ATOMIC_STATIC_LINK -DBOOST_CHRONO_NO_LIB -DBOOST_CHRONO_STATIC_LINK -DBOOST_CONTAINER_NO_LIB -DBOOST_CONTAINER_STATIC_LINK -DBOOST_DATE_TIME_NO_LIB -DBOOST_DATE_TIME_STATIC_LINK -DBOOST_THREAD_NO_LIB -DBOOST_THREAD_STATIC_LINK -DBOOST_THREAD_USE_LIB -Drsize_t=ssize_t -isystem xxx/PacktPublishing-Asynchronous-Programming-with-CPP/build/vcpkg_installed/arm64-osx/include -Wall -g -std=gnu++26 -arch arm64 -fsanitize=address -fno-omit-frame-pointer -g -O0 -E -x c++ xxx/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_12/12x01-ASAN_heap_use_after_free.cpp -MT Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o.ddi -MD -MF Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o.ddi.d -fmodules-ts -fdeps-file=Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o.ddi -fdeps-target=Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o -fdeps-format=p1689r5 -o Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o.ddi.i
+[build] clang++: error: unknown argument: '-fmodules-ts'
+[build] clang++: error: unknown argument: '-fdeps-file=Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o.ddi'
+[build] clang++: error: unknown argument: '-fdeps-target=Chapter_12/CMakeFiles/12x01-ASAN_heap_use_after_free.dir/12x01-ASAN_heap_use_after_free.cpp.o'
+[build] clang++: error: unknown argument: '-fdeps-format=p1689r5'
+[build] ninja: build stopped: subcommand failed.
+[proc] The command: /opt/homebrew/bin/cmake --build xxx/PacktPublishing-Asynchronous-Programming-with-CPP/build --config Debug --target 12x01-ASAN_heap_use_after_free -- exited with code: 1
+[driver] Build completed: 00:00:00.031
+[build] Build finished with exit code 1
+
+----
+
+
+== packages
+
+----
+[cmake]   # this is heuristically generated, and may not be correct
+[cmake]   find_package(benchmark CONFIG REQUIRED)
+[cmake]   target_link_libraries(main PRIVATE benchmark::benchmark benchmark::benchmark_main)
+[cmake] 
+[cmake] benchmark provides pkg-config modules:
+[cmake] 
+[cmake]   # Google microbenchmark framework
+[cmake]   benchmark
+[cmake] 
+[cmake]   # Google microbenchmark framework (with main() function)
+[cmake]   benchmark_main
+[cmake] 
+[cmake] The package fmt provides CMake targets:
+[cmake] 
+[cmake]     find_package(fmt CONFIG REQUIRED)
+[cmake]     target_link_libraries(main PRIVATE fmt::fmt)
+[cmake] 
+[cmake]     # Or use the header-only version
+[cmake]     find_package(fmt CONFIG REQUIRED)
+[cmake]     target_link_libraries(main PRIVATE fmt::fmt-header-only)
+[cmake] 
+[cmake] The package gtest is compatible with built-in CMake targets:
+[cmake] 
+[cmake]     enable_testing()
+[cmake]     
+[cmake]     find_package(GTest CONFIG REQUIRED)
+[cmake]     target_link_libraries(main PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+[cmake]     
+[cmake]     add_test(AllTestsInMain main)
+[cmake] 
+[cmake] The package spdlog provides CMake targets:
+[cmake] 
+[cmake]     find_package(spdlog CONFIG REQUIRED)
+[cmake]     target_link_libraries(main PRIVATE spdlog::spdlog)
+[cmake] 
+[cmake]     # Or use the header-only version
+[cmake]     find_package(spdlog CONFIG REQUIRED)
+[cmake]     target_link_libraries(main PRIVATE spdlog::spdlog_header_only)
+----
+
+
+
+== g++-16
+
+https://www.baeldung.com/linux/gcc-default-include-directories
+
+https://gcc.gnu.org/onlinedocs/gccint/Spec-Files.html
+----
+ls -la /opt/homebrew/Cellar/gcc/16.1.0/include/c++/16/
+
+--sysroot dir
+
+-nostdinc
+-isystem
+
+
+echo | gcc -xc -E -v -
+echo | gcc -xc++ -E -v -
+
+echo | gcc-16 -xc -E -v -
+echo | g++-16 -xc++ -E -v -
+
+cpp -v /dev/null -o /dev/null
+
+echo | gcc -Wp,-v -x c++ - -fsyntax-only
+
+echo | g++-16 -Wp,-v -x c++ - -fsyntax-only
+
+c++ -xc++ /dev/null -E -Wp,-v 2>&1 | sed -n 's,^ ,,p'
+
+cc  -xc   /dev/null -E -Wp,-v 2>&1 | sed -n 's,^ ,,p'
+
+g++-16 -xc++ /dev/null -E -Wp,-v 2>&1 | sed -n 's,^ ,,p'
+
+gcc-16 -xc   /dev/null -E -Wp,-v 2>&1 | sed -n 's,^ ,,p'
+
+
+$(gcc -print-prog-name=gcc-16) -v
+$(gcc -print-prog-name=g++-16) -v
+
+
+CMAKE_<LANG>_IMPLICIT_INCLUDE_DIRECTORIES
+CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES
+CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES
+
+LD_LIBRARY_PATH
+
+
+xcrun --show-sdk-path
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+
+CPLUS_INCLUDE_PATH
+
+# adjust your llvm and CLT include paths to match your setup
+export CPLUS_INCLUDE_PATH=/usr/local/opt/llvm/include/c++/v1:/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include
+
+export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib
+
+----
+
+https://docs.brew.sh/Tips-and-Tricks
+
+https://docs.brew.sh/C++-Standard-Libraries
+
+Build issues on macOS Catalina (fatal error: 'wchar.h' file not found)
+https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/issues/1055#issuecomment-581920327
+
+
+https://cmichel.io/fixing-cpp-compilation-bugs-for-the-mac-os-catalina-upgrade/
+
+https://explainshell.com/explain?cmd=echo+%7C+gcc+-xc+-E+-v+-
+
+----
+echo | gcc-16 -xc -E -v -
+Using built-in specs.
+COLLECT_GCC=gcc-16
+Target: aarch64-apple-darwin25
+Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-16 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 16.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin25 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 16.1.0 (Homebrew GCC 16.1.0) 
+COLLECT_GCC_OPTIONS='-E' '-v' '-mmacosx-version-min=26.0.0' '-asm_macosx_version_min=26.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64'
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../libexec/gcc/aarch64-apple-darwin25/16/cc1 -E -quiet -v -iprefix /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/ -D__DYNAMIC__ - -fPIC -mmacosx-version-min=26.0.0 -mcpu=apple-m1 -mlittle-endian -mabi=lp64 -dumpbase -
+ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../aarch64-apple-darwin25/include"
+ignoring duplicate directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include"
+ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/local/include"
+ignoring duplicate directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include-fixed"
+ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../aarch64-apple-darwin25/include"
+ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/Library/Frameworks"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include-fixed
+ /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include
+ /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/System/Library/Frameworks
+End of search list.
+# 0 "<stdin>"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "<stdin>"
+COMPILER_PATH=/opt/homebrew/Cellar/gcc/16.1.0/bin/../libexec/gcc/aarch64-apple-darwin25/16/:/opt/homebrew/Cellar/gcc/16.1.0/bin/../libexec/gcc/
+LIBRARY_PATH=/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/:/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/:/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../
+COLLECT_GCC_OPTIONS='-E' '-v' '-mmacosx-version-min=26.0.0' '-asm_macosx_version_min=26.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64'
+----
+
+----
+echo | g++-16 -xc++ -E -v -
+Using built-in specs.
+COLLECT_GCC=g++-16
+Target: aarch64-apple-darwin25
+Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-16 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 16.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin25 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 16.1.0 (Homebrew GCC 16.1.0) 
+COLLECT_GCC_OPTIONS='-E' '-v' '-mmacosx-version-min=26.0.0' '-asm_macosx_version_min=26.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64'
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../libexec/gcc/aarch64-apple-darwin25/16/cc1plus -E -quiet -v -iprefix /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/ -D__DYNAMIC__ - -fPIC -mmacosx-version-min=26.0.0 -mcpu=apple-m1 -mlittle-endian -mabi=lp64 -dumpbase -
+ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../aarch64-apple-darwin25/include"
+ignoring duplicate directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../include/c++/16"
+ignoring duplicate directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../include/c++/16/aarch64-apple-darwin25"
+ignoring duplicate directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../include/c++/16/backward"
+ignoring duplicate directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include"
+ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/local/include"
+ignoring duplicate directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include-fixed"
+ignoring nonexistent directory "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/../../../../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../aarch64-apple-darwin25/include"
+ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/Library/Frameworks"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../include/c++/16
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../include/c++/16/aarch64-apple-darwin25
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../../../../include/c++/16/backward
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include
+ /opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/include-fixed
+ /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include
+ /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/System/Library/Frameworks
+End of search list.
+# 0 "<stdin>"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "<stdin>"
+COMPILER_PATH=/opt/homebrew/Cellar/gcc/16.1.0/bin/../libexec/gcc/aarch64-apple-darwin25/16/:/opt/homebrew/Cellar/gcc/16.1.0/bin/../libexec/gcc/
+LIBRARY_PATH=/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/:/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/:/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../
+COLLECT_GCC_OPTIONS='-E' '-v' '-mmacosx-version-min=26.0.0' '-asm_macosx_version_min=26.0' '-nodefaultexport' '-mcpu=apple-m1' '-mlittle-endian' '-mabi=lp64'
+
+
+----

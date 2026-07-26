@@ -1,0 +1,94 @@
+= Issues
+
+----
+...
+
+[build] [396/524  72% :: 14.185] Linking CXX executable bin/Chapter_03/3x01-threads_creation
+[build] [397/524  72% :: 14.185] Building CXX object Chapter_13/CMakeFiles/13x05-sort_perf.dir/13x05-sort_perf.cpp.o
+[build] [398/524  72% :: 14.192] Linking CXX executable bin/Chapter_03/3x02-checking_hardware_concurrency
+[build] FAILED: [code=1] bin/Chapter_03/3x02-checking_hardware_concurrency 
+[build] : && /opt/homebrew/bin/aarch64-apple-darwin25-g++-16 -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names Chapter_03/CMakeFiles/3x02-checking_hardware_concurrency.dir/3x02-checking_hardware_concurrency.cpp.o -o bin/Chapter_03/3x02-checking_hardware_concurrency  vcpkg_installed/arm64-osx/debug/lib/libboost_thread.a  vcpkg_installed/arm64-osx/debug/lib/libboost_container.a  vcpkg_installed/arm64-osx/debug/lib/libboost_atomic.a  vcpkg_installed/arm64-osx/debug/lib/libboost_chrono.a  vcpkg_installed/arm64-osx/debug/lib/libboost_date_time.a && :
+[build] Undefined symbols for architecture arm64:
+[build]   "std::__1::error_code::message() const", referenced from:
+[build]       boost::system::error_code::message() const in libboost_thread.a[2](thread.cpp.o)
+[build]   "std::runtime_error::runtime_error(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)", referenced from:
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]   "std::bad_array_new_length::bad_array_new_length()", referenced from:
+[build]       std::__throw_bad_array_new_length[abi:nqe210106]() in libboost_thread.a[2](thread.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::__init(char const*, unsigned long)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::basic_string[abi:nqe210106]<0>(char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::append(char const*)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> std::__1::operator+[abi:nqe210106]<char, std::__1::char_traits<char>, std::__1::allocator<char>>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>&&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::operator+=[abi:nqe210106](char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::append(char const*, unsigned long)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::append[abi:nqe210106](std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in libboost_thread.a[2](thread.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::push_back(char)", referenced from:
+[build]       std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::operator+=[abi:nqe210106](char) in libboost_thread.a[2](thread.cpp.o)
+[build]   "std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>::~basic_string()", referenced from:
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       boost::system::system_error::system_error(boost::system::error_code const&, char const*) in libboost_thread.a[2](thread.cpp.o)
+[build]       ...
+[build] ld: symbol(s) not found for architecture arm64
+[build] collect2: error: ld returned 1 exit status
+[build] [398/524  72% :: 14.227] Building CXX object Chapter_10/CMakeFiles/10x09-cobalt_join_gather.dir/10x09-cobalt_join_gather.cpp.o
+
+...
+
+[build] [398/524  74% :: 14.503] Building CXX object Chapter_12/CMakeFiles/12x20-testing_exceptions.dir/12x20-testing_exceptions.cpp.o
+[build] [398/524  75% :: 14.517] Building CXX object Chapter_13/CMakeFiles/13x06-false_sharing.dir/13x06-false_sharing.cpp.o
+[build] FAILED: [code=1] Chapter_13/CMakeFiles/13x06-false_sharing.dir/13x06-false_sharing.cpp.o 
+[build] /opt/homebrew/bin/aarch64-apple-darwin25-g++-16 -DBENCHMARK_STATIC_DEFINE -isystem /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/build/vcpkg_installed/arm64-osx/include -O3 -DNDEBUG -std=c++20 -march=native -std=gnu++26 -arch arm64 -MD -MT Chapter_13/CMakeFiles/13x06-false_sharing.dir/13x06-false_sharing.cpp.o -MF Chapter_13/CMakeFiles/13x06-false_sharing.dir/13x06-false_sharing.cpp.o.d -fmodules-ts -fmodule-mapper=Chapter_13/CMakeFiles/13x06-false_sharing.dir/13x06-false_sharing.cpp.o.modmap -MD -fdeps-format=p1689r5 -x c++ -o Chapter_13/CMakeFiles/13x06-false_sharing.dir/13x06-false_sharing.cpp.o -c /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x06-false_sharing.cpp
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x06-false_sharing.cpp: In function 'void set_affinity(int)':
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x06-false_sharing.cpp:20:5: error: 'cpu_set_t' was not declared in this scope
+[build]    20 |     cpu_set_t cpuset;
+[build]       |     ^~~~~~~~~
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x06-false_sharing.cpp:21:15: error: 'cpuset' was not declared in this scope
+[build]    21 |     CPU_ZERO(&cpuset);
+[build]       |               ^~~~~~
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x06-false_sharing.cpp:21:5: error: 'CPU_ZERO' was not declared in this scope; did you mean 'FP_ZERO'?
+[build]    21 |     CPU_ZERO(&cpuset);
+[build]       |     ^~~~~~~~
+[build]       |     FP_ZERO
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x06-false_sharing.cpp:22:5: error: 'CPU_SET' was not declared in this scope
+[build]    22 |     CPU_SET(core, &cpuset);
+[build]       |     ^~~~~~~
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x06-false_sharing.cpp:23:9: error: 'pthread_setaffinity_np' was not declared in this scope; did you mean 'pthread_setname_np'?
+[build]    23 |     if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset) != 0) {
+[build]       |         ^~~~~~~~~~~~~~~~~~~~~~
+[build]       |         pthread_setname_np
+[build] [398/524  75% :: 14.600] Building CXX object Chapter_13/CMakeFiles/13x08-spsp_lock_free_queue.dir/13x08-spsp_lock_free_queue.cpp.o
+[build] FAILED: [code=1] Chapter_13/CMakeFiles/13x08-spsp_lock_free_queue.dir/13x08-spsp_lock_free_queue.cpp.o 
+[build] /opt/homebrew/bin/aarch64-apple-darwin25-g++-16 -DBENCHMARK_STATIC_DEFINE -isystem /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/build/vcpkg_installed/arm64-osx/include -O3 -DNDEBUG -std=c++20 -march=native -std=gnu++26 -arch arm64 -MD -MT Chapter_13/CMakeFiles/13x08-spsp_lock_free_queue.dir/13x08-spsp_lock_free_queue.cpp.o -MF Chapter_13/CMakeFiles/13x08-spsp_lock_free_queue.dir/13x08-spsp_lock_free_queue.cpp.o.d -fmodules-ts -fmodule-mapper=Chapter_13/CMakeFiles/13x08-spsp_lock_free_queue.dir/13x08-spsp_lock_free_queue.cpp.o.modmap -MD -fdeps-format=p1689r5 -x c++ -o Chapter_13/CMakeFiles/13x08-spsp_lock_free_queue.dir/13x08-spsp_lock_free_queue.cpp.o -c /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x08-spsp_lock_free_queue.cpp
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x08-spsp_lock_free_queue.cpp: In function 'void set_affinity(int)':
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x08-spsp_lock_free_queue.cpp:14:5: error: 'cpu_set_t' was not declared in this scope
+[build]    14 |     cpu_set_t cpuset;
+[build]       |     ^~~~~~~~~
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x08-spsp_lock_free_queue.cpp:15:15: error: 'cpuset' was not declared in this scope
+[build]    15 |     CPU_ZERO(&cpuset);
+[build]       |               ^~~~~~
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x08-spsp_lock_free_queue.cpp:15:5: error: 'CPU_ZERO' was not declared in this scope
+[build]    15 |     CPU_ZERO(&cpuset);
+[build]       |     ^~~~~~~~
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x08-spsp_lock_free_queue.cpp:16:5: error: 'CPU_SET' was not declared in this scope
+[build]    16 |     CPU_SET(core, &cpuset);
+[build]       |     ^~~~~~~
+[build] /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/Chapter_13/13x08-spsp_lock_free_queue.cpp:17:9: error: 'pthread_setaffinity_np' was not declared in this scope; did you mean 'pthread_setname_np'?
+[build]    17 |     if (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset) != 0) {
+[build]       |         ^~~~~~~~~~~~~~~~~~~~~~
+[build]       |         pthread_setname_np
+[build] [398/524  75% :: 14.618] Building CXX object Chapter_12/CMakeFiles/12x19-testing_async_function_with_mocking.dir/12x19-testing_async_function_with_mocking.cpp.o
+[build] [398/524  75% :: 14.633] Building CXX object Chapter_13/CMakeFiles/13x03-benchmark_sort.dir/13x03-benchmark_sort.cpp.o
+[build] [398/524  75% :: 14.737] Building CXX object Chapter_13/CMakeFiles/13x07-thread_contention.dir/13x07-thread_contention.cpp.o
+[build] [398/524  75% :: 14.945] Building CXX object Chapter_11/CMakeFiles/11x01-logging.dir/11x01-logging.cpp.o
+[build] ninja: build stopped: subcommand failed.
+[proc] The command: /opt/homebrew/bin/cmake --build /Users/hgh/hgh/dev/github/hghpublic/PacktPublishing-Asynchronous-Programming-with-CPP/build --config Debug --target all -- exited with code: 1
+[driver] Build completed: 00:00:14.960
+[build] Build finished with exit code 1
+
+----

@@ -1,0 +1,10 @@
+= boost
+
+
+Using Coroutines with Boost.Cobalt
+
+https://www.youtube.com/watch?v=yElSdUqEvME
+
+C++ Coroutines at Scale - Implementation Choices at Google - Aaron Jacobs - C++Now 2024
+
+https://www.youtube.com/watch?v=k-A12dpMYHo
