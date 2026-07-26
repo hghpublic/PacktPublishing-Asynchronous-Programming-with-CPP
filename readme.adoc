@@ -1,0 +1,60 @@
+= Asynchronous Programming with C++
+:toc:
+:sectnums:
+ifndef::env-github[:icons: font]
+:note-caption: :paperclip:
+:important-caption: :exclamation:
+:warning-caption: :warning:
+
+[IMPORTANT]
+====
+The commit history of this branch is volatile. +
+Rebasing and force pushing happens at will. +
+The commits in this branch mostly collect changes with a narrow scope. +
+They rarely document code evolution. +
+The history may be rewritten without notice.
+====
+
+== Asynchronous Programming with C++
+
+Javier Reguera-Salgado, Juan Antonio Rufes +
+Asynchronous Programming with C++: Build blazing-fast software with multithreading and asynchronous programming for ultimate efficiency
+
+Packt::
+https://www.packtpub.com/en-us/product/asynchronous-programming-with-c-9781835884256
+
+O'Reilly::
+https://learning.oreilly.com/library/view/asynchronous-programming-with/9781835884249/
+
+== Review
+
+https://accu.org/bookreviews/2025/yitzchaki_2050/
+
+== Record and Replay Framework `rr`
+
+https://rr-project.org/
+
+https://github.com/rr-debugger/rr
+
+== Stash
+
+=== C++ Concurrency in Action, Second Edition
+
+https://learning.oreilly.com/library/view/c-concurrency-in/9781617294693/
+
+Video Edition::
+
+https://learning.oreilly.com/videos/c-concurrency-in/9781617294693VE/
+
+
+Audiobook Edition::
+
+https://learning.oreilly.com/videos/c-concurrency-in/9781617294693AU/
+
+=== Pro TBB: C++ Parallel Programming with Threading Building Blocks
+
+https://learning.oreilly.com/library/view/pro-tbb-c/9781484243985/
+
+=== High-Performance Computing and Concurrency
+
+https://learning.oreilly.com/course/highperformance-computing-and/9781491967560/
