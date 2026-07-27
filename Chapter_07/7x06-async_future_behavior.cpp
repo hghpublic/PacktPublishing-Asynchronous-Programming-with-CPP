@@ -33,7 +33,7 @@ int main() {
     // Running several tasks without storing the future.
     auto start = std::chrono::high_resolution_clock::now();
     for (unsigned i = 0; i < NUM_TASKS; i++) {
-        std::async(std::launch::async, func, i);
+        [[maybe_unused]] auto _ = std::async(std::launch::async, func, i);
     }
     std::cout << "Discarding futures: " << duration_from(start) << '\n';
 
